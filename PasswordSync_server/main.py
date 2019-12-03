@@ -12,7 +12,7 @@ DATA_FILE = os.getcwd() + '/data/db'
 def hello_world():
     return (
         "[+] /field/[parameter]<br/>"
-        "[+] /getAll/[parameter]/"
+        "[+] /getNames/[parameter]/"
     )
 
 
@@ -56,14 +56,14 @@ def query(private_key, method, key, value):
 
 
 @app.route(
-    "/getAll/<string:private_key>"
+    "/getNames/<string:private_key>"
 )
 def return_all(private_key):
 
     data = data_storage.touch_data(DATA_FILE, None, "get")
 
     if private_key in data.keys():
-        return str(list(data[private_key].keys()))
+        return '<br/>'.join(list(data[private_key].keys()))
     
     else:
         return "wrong private key!"
